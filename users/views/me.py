@@ -26,9 +26,10 @@ class MeModelViewset(viewsets.ViewSet):
                 profile = Profile.objects.get(user=user)
                 profile_serializer = ProfileSerializer(profile)
             except ObjectDoesNotExist:
-                return Response({'msg': 'Profile doesnot exist', 'ok': False}, status=HTTP_404_NOT_FOUND)
+                user = user_serializer.data
+                return Response(user)
+                # return Response({'msg': 'Profile doesnot exist', 'ok': False}, status=HTTP_404_NOT_FOUND)
             # profile_serializer = ProfileSerializer(profile)
-            user = user_serializer.data
             profile = profile_serializer.data
             user['profile'] = profile
             return Response(user)
