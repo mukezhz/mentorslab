@@ -36,3 +36,13 @@ class TestMentorMenteeFetch(APITestCase):
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.assertEqual(type(resp.json()), type([]))
         self.assertEqual(resp.json()[0]['username'], 'user1')
+
+    def test_get_single_user(self):
+        url = '/api/users/users/user/'
+        resp = self.client.get(url, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp.json()['username'], 'user')
+        url = '/api/users/users/user1/'
+        resp = self.client.get(url, format='json')
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        self.assertEqual(resp.json()['username'], 'user1')
