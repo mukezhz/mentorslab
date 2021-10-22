@@ -3,9 +3,9 @@ from users.views import me, users
 from mentorslab.urls import router
 
 router.register('me', me.MeModelViewset, basename='me')
-router.register('users', users.UserModelViewset, basename='user')
 router.register('mentors', users.MentorModelViewSet, basename='mentor')
 router.register('mentees', users.MenteeModelViewSet, basename='mentor')
+router.register('', users.UserModelViewset, basename='user')
 
 urlpatterns = [
         path('', include(router.urls)),
