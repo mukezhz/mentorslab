@@ -7,7 +7,7 @@ from users.models import CustomUser
 
 class UserModelViewset(ModelViewSet):
     permission_classes = [AllowAny]
-    lookup_field = 'uuid'
+    lookup_field = 'username'
     serializer_class = UserSerializer
     queryset = CustomUser.objects.all()
 
