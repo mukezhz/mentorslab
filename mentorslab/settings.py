@@ -51,7 +51,8 @@ LIBRARY_APPS = [
     ]
 USER_APPS = [
     'api',
-    'users'
+    'users',
+    'mentorship'
     ]
 INSTALLED_APPS = DJANGO_APPS + LIBRARY_APPS + USER_APPS
 
