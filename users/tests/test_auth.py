@@ -1,8 +1,7 @@
-from rest_framework.test import APIClient, APITestCase, APIRequestFactory
+from rest_framework.test import APIClient, APITestCase
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 from rest_framework import status
-from rest_framework_simplejwt.tokens import AccessToken ,RefreshToken
 
 
 USER = get_user_model()
@@ -27,7 +26,6 @@ class TestAuthentication(APITestCase):
                 "password": "Nepal@123"
                 }
         cls.client = APIClient()
-        cls.factory = APIRequestFactory()
 
     def test_session_authentication(self):
         is_loggedin = self.client.login(email="user@user.com", password="Nepal@123")
@@ -42,12 +40,11 @@ class TestAuthentication(APITestCase):
         resp = self.client.post(self.url_token, self.credentials, format='json')
         access_token = resp.data.get('access')
         self.client.credentials(HTTP_AUTHORIZATION='Jwt {0}'.format(access_token))
-        request = self.client.get('/api/users/me/', format='json')
+        resp = self.client.get('/api/users/me/', format='json')
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
 
     def test_jwt_token_authentication_unauthorized(self):
         resp = self.client.post(self.url_token, self.credentials, format='json')
-        access_token = resp.data.get('access')
         resp = self.client.get('/api/users/me/', format='json')
         status_code = resp.status_code
         self.assertEqual(resp.json().get('ok'), False)
