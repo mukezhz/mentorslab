@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from users.api.serializers import UserSerializer, ProfileSerializer
 from users.models import CustomUser, Profile
 from rest_framework.response import Response
@@ -10,7 +10,7 @@ from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED, HTT
 
 
 class MeModelViewset(viewsets.ViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     lookup_field = 'uuid'
 
     def list(self, request, *args, **kwargs):
@@ -18,8 +18,6 @@ class MeModelViewset(viewsets.ViewSet):
         jwt_authentication = JWTAuthentication()
         response = jwt_authentication.authenticate(request)
         # queryset = CustomUser.objects.filter(owner=request.user)
-        # print(queryset)
-        print(request.user)
         if request.auth:
             user, token = response
             user_serializer = UserSerializer(user)
@@ -40,7 +38,7 @@ class MeModelViewset(viewsets.ViewSet):
 
 class CreateProfile(CreateAPIView):
     queryset = Profile.objects.all()
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = ProfileSerializer
 
     def post(self, request, *args, **kwargs):

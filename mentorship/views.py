@@ -3,7 +3,7 @@ from rest_framework.generics import (
         ListAPIView,
         RetrieveAPIView,
         UpdateAPIView)
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Mentorship, MentorshipResponse
@@ -18,7 +18,7 @@ from .serializers import (
 class MentorshipApply(CreateAPIView):
     queryset = Mentorship.objects.all()
     serializer_class = ApplySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         user = request.user
@@ -42,7 +42,7 @@ class MentorshipApply(CreateAPIView):
 class MentorshipAnswer(CreateAPIView):
     queryset = Mentorship.objects.all()
     serializer_class = AnswerSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -60,7 +60,7 @@ class MentorshipAnswer(CreateAPIView):
 class MentorshipRequestList(ListAPIView):
     queryset = Mentorship.objects.all()
     serializer_class = RequestSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
@@ -74,14 +74,14 @@ class MentorshipRequestList(ListAPIView):
 class MentorshipRequestRetrieve(RetrieveAPIView):
     queryset = Mentorship.objects.all()
     serializer_class = RequestSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     lookup_field = 'uuid'
 
 
 class MentorshipResponseList(ListAPIView):
     queryset = MentorshipResponse.objects.all()
     serializer_class = ResponseSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
@@ -95,7 +95,7 @@ class MentorshipResponseList(ListAPIView):
 
 class MentorshipResponseRetrieve(RetrieveAPIView):
     serializer_class = ResponseSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     lookup_field = 'uuid'
 
     def get_queryset(self):
@@ -105,5 +105,5 @@ class MentorshipResponseRetrieve(RetrieveAPIView):
 class MentorshipStatusUpdate(UpdateAPIView):
     serializer_class = UpdateStatusSerializer
     queryset = Mentorship.objects.all()
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     lookup_field = 'uuid'
