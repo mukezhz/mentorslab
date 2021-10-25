@@ -19,6 +19,7 @@ class MeModelViewset(viewsets.ViewSet):
         response = jwt_authentication.authenticate(request)
         # queryset = CustomUser.objects.filter(owner=request.user)
         # print(queryset)
+        print(request.user)
         if request.auth:
             user, token = response
             user_serializer = UserSerializer(user)
@@ -30,6 +31,7 @@ class MeModelViewset(viewsets.ViewSet):
                 return Response(user)
                 # return Response({'msg': 'Profile doesnot exist', 'ok': False}, status=HTTP_404_NOT_FOUND)
             # profile_serializer = ProfileSerializer(profile)
+            user = user_serializer.data
             profile = profile_serializer.data
             user['profile'] = profile
             return Response(user)
