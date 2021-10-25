@@ -1,7 +1,13 @@
+import uuid
 from django.db import models
 
 
 class Mentorship(models.Model):
+    uuid = models.UUIDField(
+            unique=True,
+            default=uuid.uuid4,
+            editable=False,
+            )
     title = models.CharField(max_length=120)
     message = models.TextField(max_length=512)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -13,19 +19,23 @@ class Mentorship(models.Model):
     mentor_id = models.CharField(max_length=32)
 
     def __str__(self):
-        return f"request {self.title}"
+        return self.mentee_id
 
 
 class MentorshipResponse(models.Model):
+    uuid = models.UUIDField(
+            unique=True,
+            default=uuid.uuid4,
+            editable=False,
+            )
+    mentee_id = models.CharField(max_length=32)
     mentorship = models.OneToOneField(to=Mentorship, on_delete=models.PROTECT)
+    message = models.TextField(max_length=512)
     date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
     link = models.CharField(max_length=128)
-    room_id = models.CharField(max_length=64)
+
 
     def __str__(self):
-        return f"response {self.mentorship.title}"
-
-    class Meta:
-        db_table = "mentorship_response"
+        return self.mentorship.mentor_id
