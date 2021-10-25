@@ -12,7 +12,7 @@ class TestCustomUser(TestCase):
         USER.objects.create(
                 username="user",
                 email="email@email.com",
-                first_name="usern",
+                first_name="user",
                 last_name="lname",
                 role="Student"
                 )
@@ -29,7 +29,8 @@ class TestCustomUser(TestCase):
 
     def test___str__(self):
         user = USER.objects.get(username="user")
-        self.assertEqual(str(user), 'usern lname')
+        user = f"{user.first_name} {user.last_name}"
+        self.assertEqual(str(user), 'user lname')
 
 
 class TestProfile(TestCase):
