@@ -52,9 +52,11 @@ LIBRARY_APPS = [
     'corsheaders',
     ]
 USER_APPS = [
-    'api',
-    'users',
-    'mentorship'
+    'api.apps.ApiConfig',
+    'users.apps.UsersConfig',
+    'mentorship.apps.MentorshipConfig',
+    'forum.apps.ForumConfig',
+    'blog.apps.BlogConfig'
     ]
 INSTALLED_APPS = DJANGO_APPS + LIBRARY_APPS + USER_APPS
 
