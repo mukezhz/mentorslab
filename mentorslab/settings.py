@@ -14,6 +14,7 @@ load_dotenv(dotenv_path=env_path)
 
 DEBUG = os.getenv("DEBUG")
 DOMAIN = os.getenv("DOMAIN")
+SEC_DOMAIN = os.getenv("SEC_DOMAIN")
 EMAIL = os.getenv("EMAIL")
 SECRET_KEY = os.getenv("SECRET_KEY")
 # database credentials
@@ -33,7 +34,7 @@ if not SECRET_KEY and DEBUG:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [DOMAIN]
+ALLOWED_HOSTS = [DOMAIN, SEC_DOMAIN]
 
 
 # Application definition
