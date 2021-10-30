@@ -1,5 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import serializers
+from rest_framework import validators
 from ..models import CustomUser, Profile
 
 
@@ -30,6 +31,12 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
+
     class Meta:
         model = CustomUser
         fields = ['id', 'uuid', 'first_name', 'last_name', 'role', 'email', 'username', 'profile']
+
+    def validate_username(self, data):
+        if data < 5:
+            raise validators.ValidationError("Username must be greater than 4 character")
+        return data

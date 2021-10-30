@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from users.api.serializers import UserSerializer, ProfileSerializer
-from users.models import CustomUser, Profile
+from users.models import Profile
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication, JWTTokenUserAuthentication
 from django.core.exceptions import ObjectDoesNotExist
