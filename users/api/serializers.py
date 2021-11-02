@@ -7,7 +7,15 @@ from ..models import CustomUser, Profile
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['id', 'uuid', 'title', 'description', 'languages', 'country', 'tags', 'avatar']
+        fields = [
+                'id',
+                'uuid',
+                'title',
+                'description',
+                'languages',
+                'country',
+                'tags',
+                'avatar']
 
     def save(self, **kwargs):
         context = self.context
@@ -34,7 +42,15 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'uuid', 'first_name', 'last_name', 'role', 'email', 'username', 'profile']
+        fields = [
+                'id',
+                'uuid',
+                'first_name',
+                'last_name',
+                'role',
+                'email',
+                'username',
+                'profile']
 
     def validate_username(self, data):
         if data < 5:

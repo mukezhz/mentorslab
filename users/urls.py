@@ -8,6 +8,10 @@ router.register('mentees', users.MenteeModelViewSet, basename='mentee')
 router.register('', users.UserModelViewset, basename='user')
 
 urlpatterns = [
+        path(
+            'create-profile/',
+            me.CreateProfile.as_view(),
+            name="create-profile"
+            ),
         path('', include(router.urls)),
-        path('create-profile/', me.CreateProfile.as_view(), name="create-profile")
         ]

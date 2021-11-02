@@ -14,6 +14,7 @@ class ForumModelAdmin(admin.ModelAdmin):
 @admin.register(Comment)
 class CommentModelAdmin(admin.ModelAdmin):
     list_display = [
+            'commentor',
             'id',
             'forum',
             'created_date',
