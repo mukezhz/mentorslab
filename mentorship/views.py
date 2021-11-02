@@ -64,7 +64,6 @@ class MentorshipRequestList(ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        print("request", user)
         try:
             return Mentorship.objects.filter(mentor_id=user.username)
         except Mentorship.DoesNotExist:
