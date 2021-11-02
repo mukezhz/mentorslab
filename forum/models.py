@@ -34,15 +34,15 @@ class VoteOption(models.IntegerChoices):
 class Vote(models.Model):
     forum = models.ForeignKey(
             Forum,
-            related_name="formvotes",
+            related_name="forumvotes",
             on_delete=models.CASCADE)
     number = models.IntegerField(
             default=VoteOption.NORMAL,
             choices=VoteOption.choices)
-    voter = models.OneToOneField(
+    voter = models.ForeignKey(
             USER,
             on_delete=models.CASCADE,
-            related_name="formvoters")
+            related_name="forumvoters")
 
     def __str__(self):
         return f"Vote: {self.forum.topic} {self.number}"
@@ -51,14 +51,14 @@ class Vote(models.Model):
 class Comment(models.Model):
     forum = models.ForeignKey(
             Forum,
-            related_name="formcomments",
+            related_name="forumcomments",
             on_delete=models.CASCADE)
     body = models.TextField()
     created_date = models.DateField(auto_now_add=True)
     commentor = models.ForeignKey(
             USER,
             on_delete=models.CASCADE,
-            related_name="formcommentors")
+            related_name="forumcommentors")
 
     def __str__(self):
         return f"Comment: {self.forum.topic}"
@@ -67,15 +67,15 @@ class Comment(models.Model):
 class CommentVote(models.Model):
     comment = models.ForeignKey(
             Comment,
-            related_name="formcommentvotes",
+            related_name="forumcommentvotes",
             on_delete=models.CASCADE)
     number = models.IntegerField(
             default=VoteOption.NORMAL,
             choices=VoteOption.choices)
-    voter = models.OneToOneField(
+    voter = models.ForeignKey(
             USER,
             on_delete=models.CASCADE,
-            related_name="formcommentvoters")
+            related_name="forumcommentvoters")
 
     def __str__(self):
         return f"CommentVote: {self.comment.forum.topic} {self.number}"

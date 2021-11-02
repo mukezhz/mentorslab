@@ -2,8 +2,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from .models import Blog
-from .serializers import BlogSerializer
+from .models import Blog, BlogComment
+from .serializers import BlogSerializer, BlogCommentSerializer
 
 
 class BlogViewSet(ModelViewSet):
@@ -23,3 +23,10 @@ class BlogViewSet(ModelViewSet):
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class BlogCommentViewSet(ModelViewSet):
+    queryset = BlogComment.objects.all()
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = BlogCommentSerializer
