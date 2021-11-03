@@ -5,7 +5,7 @@ description = ""
 authors = ["mukezhz <mukezhz@pm.me>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 Django = "^3.2.8"
 django-rest-framework = "^0.1.0"
 djangorestframework = "^3.12.4"
@@ -13,13 +13,9 @@ psycopg2 = "^2.9.1"
 djangorestframework-simplejwt = "^5.0.0"
 python-dotenv = "^0.19.1"
 django-cors-headers = "^3.10.0"
-<<<<<<< HEAD
-gunicorn = "^20.1.0"
-=======
 PyYAML = "^6.0"
 uritemplate = "^4.1.1"
 coreapi = "^2.3.3"
->>>>>>> 4d622fa8380a65241eea3f77b68bf0134d7539d1
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
