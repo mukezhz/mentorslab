@@ -1,6 +1,9 @@
 from django.urls import path, include
 from users.views import me, users
-from mentorslab.urls import router
+from rest_framework.routers import SimpleRouter
+
+
+router = SimpleRouter()
 
 router.register('me', me.MeModelViewset, basename='me')
 router.register('mentors', users.MentorModelViewSet, basename='mentor')
