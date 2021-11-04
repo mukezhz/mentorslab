@@ -14,6 +14,7 @@ load_dotenv(dotenv_path=env_path)
 
 DEBUG = os.getenv("DEBUG")
 DOMAIN = os.getenv("DOMAIN")
+SEC_DOMAIN = os.getenv("SEC_DOMAIN")
 EMAIL = os.getenv("EMAIL")
 SECRET_KEY = os.getenv("SECRET_KEY")
 # database credentials
@@ -33,8 +34,8 @@ if DEBUG=='True':
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 else:
     DEBUG = False
+    
 ALLOWED_HOSTS = [DOMAIN]
-
 
 # Application definition
 DJANGO_APPS = [
