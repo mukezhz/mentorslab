@@ -25,8 +25,9 @@ jobs:
       run: |
         python -m pip install poetry
         poetry install
-      env:
-          SECRET_KEY: django-insecure-h_rqe^bygp1n%t
+      env: 
+        CI: false
+        SKIP_PREFLIGHT_CHECK: true
     - name: Run Tests
       run: |
         poetry run python manage.py test
