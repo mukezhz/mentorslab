@@ -25,14 +25,14 @@ DB_PORT = os.getenv("DB_PORT")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
-if not SECRET_KEY and DEBUG:
-    warnings.warn("SECRET_KEY not configured, using a random temporary key.")
-    SECRET_KEY = get_random_secret_key()
+if DEBUG=='True':
+    DEBUG = True
+    if not SECRET_KEY :
+        warnings.warn("SECRET_KEY not configured, using a random temporary key.")
+        SECRET_KEY = get_random_secret_key()
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+else:
+    DEBUG = False
 ALLOWED_HOSTS = [DOMAIN]
 
 
