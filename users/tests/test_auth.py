@@ -47,6 +47,5 @@ class TestAuthentication(APITestCase):
         resp = self.client.post(self.url_token, self.credentials, format='json')
         resp = self.client.get('/api/users/me/', format='json')
         status_code = resp.status_code
-        self.assertEqual(resp.json().get('ok'), False)
-        self.assertEqual(resp.json().get('msg'), 'You are not authorized')
+        self.assertEqual(resp.json().get('detail'), 'Authentication credentials were not provided.')
         self.assertEqual(status_code, status.HTTP_401_UNAUTHORIZED)
