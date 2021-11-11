@@ -15,7 +15,7 @@ class ProfileSerializer(serializers.ModelSerializer):
                 'languages',
                 'country',
                 'tags',
-                'avatar']
+                ]
 
     def save(self, **kwargs):
         context = self.context
