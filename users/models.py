@@ -15,9 +15,16 @@ class CustomUser(AbstractUser):
             )
     role = models.CharField(max_length=10, verbose_name="Role of User")
     email = models.EmailField(max_length=254, unique=True)
-    avatar = models.CharField(max_length=256, default=f"https://ui-avatars.com/api/?name={first_name}+{last_name}&background=0D8ABC&color=fff")
+    avatar = models.CharField(max_length=256, default="")
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+
+    def save(self, *args, **kwargs):
+        if not self.avatar:
+            if not self.first_name:
+                Exception("First name and Last name is required")
+            self.avatar = f"https://ui-avatars.com/api/?name={self.first_name}+{self.last_name}&background=0D8ABC&color=fff"
+        super(CustomUser, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.username
