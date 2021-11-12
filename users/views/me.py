@@ -9,6 +9,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.status import (
         HTTP_401_UNAUTHORIZED,
         HTTP_400_BAD_REQUEST)
+from django.contrib.auth import get_user_model
+
+USER = get_user_model()
 
 
 class MeModelViewset(viewsets.ViewSet):
@@ -28,10 +31,12 @@ class MeModelViewset(viewsets.ViewSet):
                 profile_serializer = ProfileSerializer(profile)
             except ObjectDoesNotExist:
                 user = user_serializer.data
-                return Response(user)
-            user = user_serializer.data
-            profile = profile_serializer.data
-            user['profile'] = profile
+            else:
+                user = user_serializer.data
+                profile = profile_serializer.data
+                user['profile'] = profile
+            avatar = USER.objects.get(username=user.get('username')).avatar
+            user['avatar'] = avatar
             return Response(user)
         return Response({
             'msg': 'You are not authorized',
