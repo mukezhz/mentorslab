@@ -16,7 +16,6 @@ export const Login = () => {
 
   const onFormSubmit = ({ email, password }: LoginData) => {
     dispatch(logIn({ email, password }));
-    // dispatch(loadCurrentUser())
   };
 
   // @TODO : need to fix this , error should be displayed on screen not as toast
