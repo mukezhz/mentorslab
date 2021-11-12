@@ -20,7 +20,6 @@ export const MenuItems = () => {
   if (status === 'pending' || status === 'idle') return <p>Loading nav...</p>;
 
   else if (status === 'logged') {
-  console.log(user)
     const privateLinks = (
       <Menu mode="horizontal" selectable={false} className="app-header__menu--private">
         <SubMenu
