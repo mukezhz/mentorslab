@@ -1,4 +1,5 @@
 import { Avatar, Menu } from 'antd';
+import * as React from 'react';
 import * as routes from 'constants/routes';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
@@ -12,14 +13,14 @@ export const MenuItems = () => {
   const { user, status } = useAppSelector(state => state.auth);
   const dispatch = useAppDispatch();
 
-  const hasProfile = !!user.profile;
   const onLogOut = () => {
     dispatch(logOut());
     displaySuccessNotification("You've successfully logged out!");
   };
   if (status === 'pending' || status === 'idle') return <p>Loading nav...</p>;
 
-  else if (status === 'logged' || hasProfile) {
+  else if (status === 'logged') {
+  console.log(user)
     const privateLinks = (
       <Menu mode="horizontal" selectable={false} className="app-header__menu--private">
         <SubMenu

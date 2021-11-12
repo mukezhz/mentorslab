@@ -13,11 +13,11 @@ export const Contact = () => {
               <Paragraph>
                 We want to hear your thoughts! If you have any suggestions and feedback feel free to write us an email
                 at
-                <a href="mailto:adarshaofficial@gmail.com"> adarshaofficial@gmail.com.</a>
+                <a href="mailto:mukezhz@gmail.com"> mukezhz@gmail.com.</a>
               </Paragraph>
               <Paragraph>
                 This project is totally open-source so, if you found any problems raise issues on our{' '}
-                <a href="https://github.com/adarshaacharya/MentorLabs/issues/new" target="_blank" rel="noreferrer">
+                <a href="https://github.com/mukezhz/mentorsLab/issues/new" target="_blank" rel="noreferrer">
                   GitHub repo
                 </a>
                 .

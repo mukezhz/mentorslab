@@ -10,7 +10,7 @@ export const NonAuthRoute = ({ children }: { children: JSX.Element }) => {
   const access = localStorage.getItem("access_token")
 
   const dashboard =
-    user?.role === Role.STUDENT
+    user.role === Role.STUDENT
       ? routes.STUDENT_DASHBOARD
       : routes.TEACHER_DASHBOARD;
 

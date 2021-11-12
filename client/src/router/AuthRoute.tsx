@@ -5,10 +5,7 @@ import { Role } from "enums";
 import { AccessDenied } from "../views";
 
 
-export const AuthRoute = ({children, roles,}: {
-children: JSX.Element;
-roles: Array<Role>;
-}) => {
+export const AuthRoute = ({children, roles,}: {children: JSX.Element; roles: Array<Role>;}) => {
   let location = useLocation();
 
   const { isAuthenticated, user, status } = useAppSelector(state => state.auth);

@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AuthState } from 'types';
+import { AuthState, User } from 'types';
 import { createAccount, loadCurrentUser, logIn, logOut } from './auth.actions';
+import authHeader from 'services/auth-header' 
 
 export const initialState: AuthState = Object.freeze({
   access: '',
-  isAuthenticated: false,
-  error: {},
+  error: '',
   status: 'idle',
+  isAuthenticated: false,
   user: {},
 });
 
@@ -15,7 +16,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     clearAuthError: (state) => {
-      state.error = {};
+      state.error = '';
     },
   },
 
@@ -47,7 +48,7 @@ const authSlice = createSlice({
     });
 
     builder.addCase(createAccount.rejected, (state, { payload }) => {
-      state.error = payload as object;
+      state.error = payload as string;
       state.isAuthenticated = false;
       state.status = 'rejected';
     });
@@ -58,12 +59,14 @@ const authSlice = createSlice({
 
     builder.addCase(logIn.fulfilled, (state, { payload }) => {
       state.isAuthenticated = true;
-      state.status = 'resolved';
+      state.status = 'logged';
       state.access = payload as string;
+      const user = JSON.parse(localStorage.getItem("user"));
+      state.user = user as {};
     });
 
     builder.addCase(logIn.rejected, (state, { payload }) => {
-      state.error = payload as object;
+      state.error = payload as string;
       state.isAuthenticated = false;
       state.status = 'rejected';
     });

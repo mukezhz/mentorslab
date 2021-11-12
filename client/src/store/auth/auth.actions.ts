@@ -35,12 +35,13 @@ export const createAccount = createAsyncThunk(
   async ({ first_name, last_name, username, email, password, password2, role }: CreateAccountData, thunkAPI) => {
     try {
       const url = config.endpoints.auth.createAccount;
-      const data = await http.post<{ user: User }>(url, { first_name, last_name, username, email, password, password2, role });
-      console.log(data)
+      const { data } = await http.post<{ user: User }>(url, { first_name, last_name, username, email, password, password2, role });
       return data;
     } catch (err) {
-      console.log(err.response.data);
-      return thunkAPI.rejectWithValue(err.response.data);
+      // console.log(err.response.data);
+      const errors = err.response.data
+      const { 0:errs } = Object.keys(errors).map(err => errors[err].map(d=>d))
+      return thunkAPI.rejectWithValue(Object.keys(errors)[0]+ " " + errs[0]);
     }
   }
 );
@@ -51,8 +52,16 @@ export const logIn = createAsyncThunk(
     try {
       const url = config.endpoints.auth.login;
       const {data: { access }} = await http.post<{ access: Auth }>(url, { email, password });
+      const me = config.endpoints.auth.me;
+      const { data } = await http.get<{ user: User }>(me, {
+        headers:{
+          "Content-Type": "application/json",
+          "Authorization": "Jwt " + access as string
+        }
+      });
+      localStorage.setItem("user", JSON.stringify(data))
       localStorage.setItem("access_token", access as string);
-      return access
+      return access;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message);
     }

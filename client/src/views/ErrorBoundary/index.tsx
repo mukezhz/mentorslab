@@ -34,7 +34,7 @@ export class ErrorBoundary extends React.Component<{}, ErrorBoundaryState> {
             title="500"
             subTitle={`We're sorry — something went wrong.
               Our team has been notified. This issue must be fixed soon.
-             But, you can directly report this issue by contacting via : adarshaofficial@gmail.com
+             But, you can directly report this issue by contacting via : mukezhz@gmail.com
               `}
             extra={
               <Button type="primary">

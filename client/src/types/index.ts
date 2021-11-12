@@ -119,7 +119,7 @@ type Status = "idle" | "pending" | "resolved" | "rejected" | "logged";
 export interface AuthState {
   status: Status;
   isAuthenticated: boolean;
-  error: object;
+  error: string;
   access: string;
   user: User;
 }

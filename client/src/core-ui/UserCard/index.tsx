@@ -23,17 +23,15 @@ export const UserCard: React.FC<UserCardProps> = ({ user }) => {
 
   return (
     <div className="card">
-    {/*
-      <img src={user.avatar} loading="lazy" alt={user.name} className="card__img" />
+      <img src={user.avatar} loading="lazy" alt={user.username} className="card__img" />
       <div className="card__location">
         <ImLocation /> {user.profile.country}
       </div>
       <div className="card__name">
         <Link to={`/users/${user.id}`} className="text--primary">
-          {user.name}
+          {user.username}
         </Link>
       </div>
-      */}
       <div className="card__title">{user.profile.title}</div>
       <Paragraph className="card__detail" ellipsis={{ rows: 2 }}>
         {user.profile.description}
