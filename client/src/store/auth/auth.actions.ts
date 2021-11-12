@@ -9,6 +9,7 @@ export const loadCurrentUser = createAsyncThunk(
     try {
       const url = config.endpoints.auth.me;
       const { data } = await http.get<{ user: User }>(url);
+      localStorage.setItem("user", JSON.stringify(data))
       return data;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message);
@@ -51,16 +52,14 @@ export const logIn = createAsyncThunk(
     try {
       const url = config.endpoints.auth.login;
       const {data: { access }} = await http.post<{ access: Auth }>(url, { email, password });
-      if (access) {
-        const me = config.endpoints.auth.me;
-        const { data } = await http.get<{ user: User }>(me, {
-          headers:{
-            "Content-Type": "application/json",
-            "Authorization": "Jwt " + access as string
-          }
-        });
-        localStorage.setItem("user", JSON.stringify(data))
-      }
+      const me = config.endpoints.auth.me;
+      const { data } = await http.get<{ user: User }>(me, {
+        headers:{
+          "Content-Type": "application/json",
+          "Authorization": "Jwt " + access as string
+        }
+      });
+      localStorage.setItem("user", JSON.stringify(data))
       localStorage.setItem("access_token", access as string);
       return access;
     } catch (err) {
