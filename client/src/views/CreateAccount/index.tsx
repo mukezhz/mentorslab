@@ -6,7 +6,8 @@ import { Helmet } from 'react-helmet-async';
 import { createAccount } from 'store/auth/auth.actions';
 import { clearAuthError } from 'store/auth/auth.slice';
 import { CreateAccountData } from 'types';
-import { displayErrorMessage } from 'utils/notifications';
+import { useNavigate } from "react-router-dom";
+import { displayErrorMessage, displaySuccessNotification } from 'utils/notifications';
 import signupImg from './assets/signup.svg';
 
 const { Content } = Layout;
@@ -16,11 +17,19 @@ const { Password } = Input;
 
 export const CreateAccount = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate()
 
   const { error, status } = useAppSelector(state => state.auth);
 
   const onFormSubmit = (formData: CreateAccountData) => {
-    dispatch(createAccount(formData));
+    dispatch(createAccount(formData))
+      .then((value: any) => {
+        if (!value.error){
+          displaySuccessNotification(`Hey ${formData.username}!!! Your account has been created. Please Login!!!`)
+          navigate("/login")
+        }
+      })
+      .catch(err => console.log(err))
   };
 
   useEffect(() => {
