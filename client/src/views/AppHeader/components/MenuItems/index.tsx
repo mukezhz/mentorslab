@@ -28,7 +28,7 @@ export const MenuItems = () => {
           key="submenu"
         >
           <Item key="/user">
-            <NavLink to={`/users/${user.id}`}>
+            <NavLink to={`/users/${user.username}`}>
               <AiOutlineUser></AiOutlineUser> Profile
             </NavLink>
           </Item>
