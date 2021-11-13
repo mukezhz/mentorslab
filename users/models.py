@@ -40,7 +40,7 @@ class Profile(models.Model):
     description = models.TextField(verbose_name="Description")
     languages = ArrayField(models.CharField(max_length=25))
     country = models.CharField(max_length=20, verbose_name="Country")
-    tags = ArrayField(models.CharField(max_length=15))
+    tags = ArrayField(models.CharField(max_length=30))
     user = models.OneToOneField(to=CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
