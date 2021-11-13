@@ -32,7 +32,6 @@ export const ProfileCreate: React.FC<UserProfileProps> = ({user}) => {
   const onFormSubmit = (values: CreateProfileData) => {
     dispatch(createProfile(values)).then((value: any) => {
         if (!value.error){
-          dispatch(fetchProfile('damn'));
           displaySuccessNotification(`Your profile has been created!!!`)
         }
     })
