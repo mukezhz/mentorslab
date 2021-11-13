@@ -8,7 +8,7 @@ import { ProfileDetails, ProfileMainCard } from './components';
 
 export const Profile = () => {
   const { id } = useParams();
-  const { user, status } = useAppSelector((state) => state.auth);
+  const { user, status } = useAppSelector((state) => state.profile);
 
   const dispatch = useAppDispatch();
 

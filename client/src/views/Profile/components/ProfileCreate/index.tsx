@@ -4,20 +4,26 @@ import { tags } from 'data/tags';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import * as React from 'react';
 import { AiOutlineMinusCircle, AiOutlinePlus } from 'react-icons/ai';
-import { createProfile } from 'store/profile/profile.action';
+import { createProfile, fetchProfile } from 'store/profile/profile.action';
 import { CreateProfileData } from 'types';
 import { displayErrorMessage, displaySuccessNotification } from 'utils/notifications';
+import { User } from 'types';
 
 const { Item, List } = Form;
 const { Title, Text } = Typography;
 const { Option } = Select;
 
-export const ProfileCreate = () => {
+type UserProfileProps = {
+  user: User;
+};
+
+export const ProfileCreate: React.FC<UserProfileProps> = ({user}) => {
   const dispatch = useAppDispatch();
   const { status, error } = useAppSelector(state => state.profile);
 
   React.useEffect(() => {
     if (status === 'rejected' && error) {
+      dispatch(fetchProfile(user.username));
       displayErrorMessage(error);
       return;
     }
@@ -26,6 +32,7 @@ export const ProfileCreate = () => {
   const onFormSubmit = (values: CreateProfileData) => {
     dispatch(createProfile(values)).then((value: any) => {
         if (!value.error){
+          dispatch(fetchProfile('damn'));
           displaySuccessNotification(`Your profile has been created!!!`)
         }
     })

@@ -28,6 +28,7 @@ const profileSlice = createSlice({
     });
 
     builder.addCase(createProfile.fulfilled, (state, { payload }) => {
+      console.log('fetchprofile', payload)
       state.msg = payload as string;
       state.status = 'resolved';
     });
