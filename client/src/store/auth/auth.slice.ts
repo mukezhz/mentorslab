@@ -27,13 +27,12 @@ const authSlice = createSlice({
 
     // handles auth/loadCurrentUser
     builder.addCase(loadCurrentUser.fulfilled, (state, { payload }) => {
-      state.user = payload;
-      state.isAuthenticated = true;
+      if (state.user === true) {console.log(state);state.user = payload;}
+      // state.isAuthenticated = true;
       state.status = 'logged';
     });
 
     builder.addCase(loadCurrentUser.rejected, (state) => {
-      state.user = {};
       state.isAuthenticated = false;
       state.status = 'rejected';
     });
