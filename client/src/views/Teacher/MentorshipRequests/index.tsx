@@ -44,7 +44,7 @@ export const TeacherMentorshipRequests = () => {
         <div className="py-2">
           {requests.map((request) => {
             return (
-              <div className="py-2" key={request.id}>
+              <div className="py-2" key={request.uuid}>
                 <MentorshipRequestCard request={request} loading={status === 'pending'} />
               </div>
             );

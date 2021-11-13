@@ -8,12 +8,12 @@ import {
   NotFound,
   // Room,
   StudentDashboard,
-  // StudentMentorshipRequest,
-  // StudentMentorshipRequests,
+  StudentMentorshipRequest,
+  StudentMentorshipRequests,
   TeacherDashboard,
-  // TeacherListings,
-  // TeacherMentorshipRequest,
-  // TeacherMentorshipRequests,
+  TeacherListings,
+  TeacherMentorshipRequest,
+  TeacherMentorshipRequests,
 } from "views";
 import { Profile } from "../views/Profile";
 import { AuthRoute } from "./AuthRoute";
@@ -71,6 +71,47 @@ export const Router = () => {
         element={
           <AuthRoute roles={[Role.STUDENT]}>
             <StudentDashboard />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path={routes.TEACHER_LISTINGS}
+        element={
+          <AuthRoute roles={[Role.STUDENT]}>
+            <TeacherListings />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path={routes.STUDENT_MENTORSHIP_REQUESTS}
+        element={
+          <AuthRoute roles={[Role.STUDENT]}>
+            <StudentMentorshipRequests />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path={routes.STUDENT_MENTORSHIP_REQUEST}
+        element={
+          <AuthRoute roles={[Role.STUDENT]}>
+            <StudentMentorshipRequest />
+          </AuthRoute>
+        }
+      />
+      <Route
+        path={routes.TEACHER_MENTORSHIP_REQUESTS}
+        element={
+          <AuthRoute roles={[Role.TEACHER]}>
+            <TeacherMentorshipRequests />
+          </AuthRoute>
+        }
+      />
+
+      <Route
+        path={routes.TEACHER_MENTORSHIP_REQUEST}
+        element={
+          <AuthRoute roles={[Role.TEACHER]}>
+            <TeacherMentorshipRequest />
           </AuthRoute>
         }
       />

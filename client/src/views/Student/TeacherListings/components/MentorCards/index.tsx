@@ -8,10 +8,9 @@ const { Paragraph } = Typography;
 
 type MentorCardsProps = {
   mentors: User[];
-  recommendMentors: boolean;
 };
 
-export const MentorCards: React.FC<MentorCardsProps> = ({ mentors, recommendMentors }) => {
+export const MentorCards: React.FC<MentorCardsProps> = ({ mentors }) => {
   const { user } = useAppSelector((state) => state.profile);
   const { status } = useAppSelector((state) => state.users);
 
@@ -35,7 +34,7 @@ export const MentorCards: React.FC<MentorCardsProps> = ({ mentors, recommendMent
     );
   }
 
-  if (mentors.length < 1 && recommendMentors) {
+  if (mentors.length < 1) {
     return (
       <section className="teacher-listings">
         <div className="container">
@@ -49,8 +48,8 @@ export const MentorCards: React.FC<MentorCardsProps> = ({ mentors, recommendMent
     <div className="card-lists">
       <Row>
         {mentors.map((mentor) => (
-          <Col xs={12} xl={8} key={mentor.id}>
-            <UserCard user={mentor} key={mentor.id} />
+          <Col xs={12} xl={8} key={mentor.username}>
+            <UserCard user={mentor} key={mentor.username} />
           </Col>
         ))}
       </Row>

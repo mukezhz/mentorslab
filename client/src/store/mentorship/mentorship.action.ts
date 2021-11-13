@@ -8,9 +8,9 @@ export const sendMentorshipRequest = createAsyncThunk(
   'mentorship/sendMentorshipRequest',
   async ({ values, mentorId }: { values: MentorshipRequestData; mentorId: string }, thunkAPI) => {
     try {
-      // /api/mentorships/apply/:username
-      const url = `${config.endpoints.mentorship.sendMentorshipRequest}/${mentorId}`;
-      const { data: { ok } } = await http.post<{ ok: boolean }>(url, values);
+      // /api/mentorships/apply/:username/
+      const url = `${config.endpoints.mentorship.sendMentorshipRequest}/${mentorId}/`;
+      const { data: { ok } } = await http.post<{ ok: boolean }>(url, {...values, mentor_id: '_'});
       return ok;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message);
@@ -61,7 +61,7 @@ export const fetchMentorshipRequestOfMentor = createAsyncThunk(
   'mentorship/fetchMentorshipRequestOfMentor',
   async (id: string, thunkAPI) => {
     try {
-      const url = `${config.endpoints.mentorship.fetchMentorshipRequestOfMentor}/${id}`;
+      const url = `${config.endpoints.mentorship.fetchMentorshipRequestOfMentor}/${id}/`;
       const { data } = await http.get<MentorshipRequest>(url);
       return data;
     } catch (err) {

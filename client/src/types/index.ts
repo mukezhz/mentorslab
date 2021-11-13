@@ -34,6 +34,7 @@ export interface MentorshipRequestData {
   background: string;
   expectation: string;
   message: string;
+  mentorId: string;
 }
 
 export interface MentorshipResponseData {
@@ -101,12 +102,11 @@ export interface Profile {
 //==============================================================================
 export interface MentorshipRequest extends MentorshipRequestData {
   id: string;
+  uuid: string;
   title: string;
-  menteeId: string;
-  mentorId: string;
+  mentee_id: string;
+  mentor_id: string;
   status: MentorshipRequestStatus;
-  mentor: User;
-  mentee: User;
   createdAt: Date;
   response?: MentorshipResponseData;
 }

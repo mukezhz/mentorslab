@@ -13,7 +13,6 @@ export const TeacherListings = () => {
   const { user: authUser } = useAppSelector((state) => state.auth);
 
   const { mentors, status } = useAppSelector((state) => state.users);
-  const [recommendMentors, setRecommendMentors] = React.useState(false);
 
   React.useEffect(() => {
     dispatch(fetchMentors());
@@ -39,10 +38,9 @@ export const TeacherListings = () => {
       </Helmet>
       <div className="container">
         <Paragraph type="secondary" className="text--center">
-          Toggle the switch below to turn on or off the smart recommendation based on Jaccard algorithm. Our algorithm
-          is trained on the basis of your profile skills, lanugaes, country and other data , so please update your
-          profile with correct information.
+          List of Mentors
         </Paragraph>
+        <MentorCards mentors={mentors} />
       </div>
     </section>
   );

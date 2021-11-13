@@ -1,15 +1,11 @@
 import { Tag, Typography } from 'antd';
-import { SocialChannels } from 'core-ui';
 import * as React from 'react';
 import { ImLocation } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import { User } from 'types';
 
-type JaccardIndex = {
-  jaccardIndex?: number;
-};
 type UserCardProps = {
-  user: User & JaccardIndex;
+  user: User;
 };
 
 const { Paragraph } = Typography;
@@ -20,7 +16,6 @@ export const UserCard: React.FC<UserCardProps> = ({ user }) => {
   }
 
   const userTagsElement = user.profile.tags.map((tag) => <Tag key={tag}>{tag}</Tag>);
-
   return (
     <div className="card">
       <img src={user.avatar} loading="lazy" alt={user.username} className="card__img" />
@@ -28,7 +23,7 @@ export const UserCard: React.FC<UserCardProps> = ({ user }) => {
         <ImLocation /> {user.profile.country}
       </div>
       <div className="card__name">
-        <Link to={`/users/${user.id}`} className="text--primary">
+        <Link to={`/users/${user.username}`} className="text--primary">
           {user.username}
         </Link>
       </div>
@@ -37,14 +32,6 @@ export const UserCard: React.FC<UserCardProps> = ({ user }) => {
         {user.profile.description}
       </Paragraph>
       <div className="card__tags">{userTagsElement}</div>
-      <div className="card__links">
-        <SocialChannels channels={user.profile.channels} isUserCard={true} />
-      </div>
-      {user.jaccardIndex && (
-        <div className="card__index">
-          <Tag color="#87d068">{user.jaccardIndex}%</Tag>
-        </div>
-      )}
     </div>
   );
 };
