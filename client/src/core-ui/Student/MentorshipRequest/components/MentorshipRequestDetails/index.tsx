@@ -8,7 +8,7 @@ type MentorshipRequestDetailsProps = {
 };
 
 export const StudentMentorshipRequestDetails: React.FC<MentorshipRequestDetailsProps> = ({ request }) => {
-  if (!request.mentor || !request.mentee) {
+  if (!request.mentor_id || !request.mentee_id) {
     return <p>Loading mentor and mentee...</p>;
   }
   return (
@@ -43,13 +43,13 @@ export const StudentMentorshipRequestDetails: React.FC<MentorshipRequestDetailsP
         <tr>
           <th>Mentor</th>
           <td>
-            <Link to={`/users/${request.mentorId}`}>{request.mentor}</Link>
+            <Link to={`/users/${request.mentor_id}`}>{request.mentor_id}</Link>
           </td>
         </tr>
         <tr>
           <th>Mentee</th>
           <td>
-            <Link to={`/users/${request.menteeId}`}>{request.mentee} (Me) </Link>
+            <Link to={`/users/${request.mentee_id}`}>{request.mentee_id} (Me) </Link>
           </td>
         </tr>
       </tbody>

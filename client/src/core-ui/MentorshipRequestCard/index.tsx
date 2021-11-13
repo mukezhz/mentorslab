@@ -3,6 +3,11 @@ import { StatusTag } from 'core-ui';
 import moment from 'moment';
 import { Link, useNavigate } from 'react-router-dom';
 import { MentorshipRequest } from 'types';
+import http from 'utils/http';
+import { User } from 'types';
+import { fetchProfile } from 'store/profile/profile.action';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import * as React from 'react';
 
 type MentorshipRequestCardProps = {
   request: MentorshipRequest;
@@ -12,15 +17,20 @@ type MentorshipRequestCardProps = {
 const { Title, Paragraph } = Typography;
 
 export const MentorshipRequestCard: React.FC<MentorshipRequestCardProps> = ({ request, loading }) => {
+  const dispatch = useAppDispatch()
+  const { user } = useAppSelector((state) => state.profile);
   const navigate = useNavigate();
 
-  const user = request.mentor ?? request.mentee;
+  React.useEffect(() => {
+    dispatch(fetchProfile(request.mentee_id)) 
+    // const {data} = await http.get<{user: User}>(`/users/${request.mentee_id}/`)
+  }, [])
+  const url = `/mentee-requests/${request.uuid}`
 
-  const url = request.mentor ? `/student-requests/${request.id}` : `/teacher-requests/${request.id}`;
-
-  if (!user) {
+  if (!request || !user) {
     return <p>Loading user...</p>;
   }
+
 
   return (
     <Card className="mentorship-request-card" loading={loading}>
@@ -29,8 +39,8 @@ export const MentorshipRequestCard: React.FC<MentorshipRequestCardProps> = ({ re
           <Space size="middle" className="mentorship-request-card__user">
             <Avatar size={65} src={user.avatar} />
             <div>
-              <Link to={`/users/${user.id}`}>
-                <b>{user}</b>
+              <Link to={`/users/${request.mentee_id}`}>
+                <b>{request.mentee_id}</b>
               </Link>
               <p>{moment(request.createdAt).startOf('millisecond').fromNow()}</p>
             </div>

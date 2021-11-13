@@ -14,7 +14,6 @@ export const StudentMentorshipRequests = () => {
   React.useEffect(() => {
     dispatch(fetchMentorshipRequestsByStudent());
   }, []);
-
   if (status === 'resolved' && requests.length < 1) {
     return (
       <div className="mentorship-requests h-90 text--center">

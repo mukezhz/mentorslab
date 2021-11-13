@@ -9,6 +9,7 @@ import { ProfileDetails, ProfileMainCard } from './components';
 export const Profile = () => {
   const { id } = useParams();
   const { user, status } = useAppSelector((state) => state.profile);
+  const { user: owner } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 
@@ -27,7 +28,7 @@ export const Profile = () => {
     );
   }
   
-  const viewerIsUser = !!user.username;
+  const viewerIsUser = user.username === owner.username;
 
   const userProfileMainElement = <ProfileMainCard viewerIsUser={viewerIsUser} user={user} />;
 
