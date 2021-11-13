@@ -6,8 +6,8 @@ import http from 'utils/http';
 export const fetchProfile = createAsyncThunk('profile/fetchProfile', async (username: string, thunkAPI) => {
   try {
     const url = `${config.endpoints.profile.fetchProfile}/${username}/`;
-    const { data: {profile} } = await http.get<User>(url);
-    return profile;
+    const { data } = await http.get<User>(url);
+    return data;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.response.data.message);
   }
