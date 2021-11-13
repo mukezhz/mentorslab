@@ -7,12 +7,14 @@ export const loadCurrentUser = createAsyncThunk(
   "auth/loadCurrentUser",
   async (_, thunkAPI) => {
     try {
+
       const user = JSON.parse(localStorage.getItem('user'))
       if (user != null) {
         return user
       } 
       const url = config.endpoints.auth.me;
       const { data } = await http.get<{ user: User }>(url);
+      console.log(data)
       localStorage.setItem("user", JSON.stringify(data))
       return data;
     } catch (err) {
