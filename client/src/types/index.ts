@@ -57,10 +57,11 @@ export interface JoinRoomData {
 //==============================================================================
 export interface User {
   id?: string;
+  uuid?: string;
+  username?: string;
   first_name?: string;
   last_name?: string;
   email?: string;
-  username?: string;
   avatar?: string;
   role?: Role;
   profile?: Profile;
