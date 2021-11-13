@@ -26,7 +26,7 @@ export const Profile = () => {
       </section>
     );
   }
-
+  
   const viewerIsUser = !!user.username;
 
   const userProfileMainElement = <ProfileMainCard viewerIsUser={viewerIsUser} user={user} />;

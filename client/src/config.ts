@@ -20,7 +20,7 @@ const config = {
       fetchMentees: '/users/mentees/',
     },
     profile: {
-      fetchProfile: '/users/',
+      fetchProfile: '/users',
       createProfile: '/users/create-profile/',
     },
     mentorship: {

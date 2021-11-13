@@ -6,7 +6,7 @@ import * as React from 'react';
 import { AiOutlineMinusCircle, AiOutlinePlus } from 'react-icons/ai';
 import { createProfile } from 'store/profile/profile.action';
 import { CreateProfileData } from 'types';
-import { displayErrorMessage } from 'utils/notifications';
+import { displayErrorMessage, displaySuccessNotification } from 'utils/notifications';
 
 const { Item, List } = Form;
 const { Title, Text } = Typography;
@@ -14,7 +14,7 @@ const { Option } = Select;
 
 export const ProfileCreate = () => {
   const dispatch = useAppDispatch();
-  const { status, error } = useAppSelector((state) => state.profile);
+  const { status, error } = useAppSelector(state => state.profile);
 
   React.useEffect(() => {
     if (status === 'rejected' && error) {
@@ -24,7 +24,11 @@ export const ProfileCreate = () => {
   }, [status, error]);
 
   const onFormSubmit = (values: CreateProfileData) => {
-    dispatch(createProfile(values));
+    dispatch(createProfile(values)).then((value: any) => {
+        if (!value.error){
+          displaySuccessNotification(`Your profile has been created!!!`)
+        }
+    })
   };
 
   const onFinishFailed = () => {
@@ -159,55 +163,6 @@ export const ProfileCreate = () => {
             </Select>
           </Item>
           {/* languages end */}
-
-          {/* social channels */}
-          <List name="channels">
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map((field) => (
-                  <Space key={field.key} align="baseline" size="small" style={{ marginRight: '4em' }}>
-                    <Item noStyle shouldUpdate={(prevValues, curValues) => prevValues.channel !== curValues.channel}>
-                      {() => (
-                        <Item
-                          {...field}
-                          label="Channel"
-                          name={[field.name, 'site']}
-                          fieldKey={[field.fieldKey, 'site']}
-                          rules={[{ required: true, message: 'Select social media' }]}
-                        >
-                          <Select style={{ width: 130 }} placeholder="Select site">
-                            {socials.map((item) => (
-                              <Option key={item.label} value={item.value}>
-                                {item.label}
-                              </Option>
-                            ))}
-                          </Select>
-                        </Item>
-                      )}
-                    </Item>
-                    <Item
-                      {...field}
-                      label="Link"
-                      name={[field.name, 'link']}
-                      fieldKey={[field.fieldKey, 'link']}
-                      rules={[{ required: true, message: 'Missing link' }]}
-                    >
-                      <Input />
-                    </Item>
-                    <AiOutlineMinusCircle onClick={() => remove(field.name)} color="red" />
-                  </Space>
-                ))}
-
-                <Item>
-                  <Button type="dashed" onClick={() => add()} block icon={<AiOutlinePlus />}>
-                    Add channels
-                  </Button>
-                </Item>
-              </>
-            )}
-          </List>
-          {/* end of social channels */}
-
           <Item>
             <Button type="primary" htmlType="submit">
               Submit
