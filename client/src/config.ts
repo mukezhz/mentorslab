@@ -32,6 +32,12 @@ const config = {
       updateMentorshipRequestStatus: '/mentorships/update-status/',
       createMentorshipResponse: '/mentorships/response/',
     },
+    blog: {
+      fetchBlogs: '/blogs/'
+    },
+    forum: {
+      fetchForums: '/forums/'
+    },
   },
 };
 export default config;

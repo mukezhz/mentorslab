@@ -3,22 +3,35 @@ import { FeatureCard } from 'core-ui';
 import { useAppSelector } from 'hooks';
 import { Helmet } from 'react-helmet-async';
 import { FaMobileAlt } from 'react-icons/fa';
+import { AiFillRead, AiOutlineFormatPainter } from "react-icons/ai";
 import { ImLab } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 const { Title, Paragraph } = Typography;
 
 export const teacherDashboardFeatues = [
   {
-    title: 'Incoming Requests',
-    description: 'View all the incoming requests send by students to you.',
-    icon: <FaMobileAlt size={'5em'} />,
-    link: '/teacher-requests',
+    title: "Incoming Requests",
+    description: "View all the incoming requests send by students to you.",
+    icon: <FaMobileAlt size={"5em"} />,
+    link: "/teacher-requests",
   },
   {
-    title: 'Explore labs',
-    description: 'Explore our interactive video and audio chat labs.',
-    icon: <ImLab size={'5em'} />,
-    link: '/labs',
+    title: "Explore labs",
+    description: "Explore our interactive video and audio chat labs.",
+    icon: <ImLab size={"5em"} />,
+    link: "/labs",
+  },
+  {
+    title: "Blogs",
+    description: "Read blogs of others members",
+    icon: <AiFillRead size={"5em"} />,
+    link: "/blogs",
+  },
+  {
+    title: "Forum",
+    description: "Enjoy forum of the system",
+    icon: <AiOutlineFormatPainter size={"5em"} />,
+    link: "/forums",
   },
 ];
 

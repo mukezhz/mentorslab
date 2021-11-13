@@ -1,32 +1,45 @@
-import { Col, Divider, Row, Typography } from 'antd';
-import * as React from 'react';
-import { FeatureCard } from 'core-ui';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { Helmet } from 'react-helmet-async';
-import { FaChalkboardTeacher, FaFacebookMessenger } from 'react-icons/fa';
-import { ImLab } from 'react-icons/im';
-import { Link } from 'react-router-dom';
-import { loadCurrentUserProfile } from 'store/auth/auth.actions';
+import { Col, Divider, Row, Typography } from "antd";
+import * as React from "react";
+import { FeatureCard } from "core-ui";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { Helmet } from "react-helmet-async";
+import { FaChalkboardTeacher, FaFacebookMessenger } from "react-icons/fa";
+import { AiFillRead, AiOutlineFormatPainter } from "react-icons/ai";
+import { ImLab } from "react-icons/im";
+import { Link } from "react-router-dom";
+import { loadCurrentUserProfile } from "store/auth/auth.actions";
 const { Title, Paragraph } = Typography;
 
 export const studentDashboardFeatures = [
   {
-    title: 'View Mentors',
-    description: 'View all the mentors waiting for your requests.',
-    icon: <FaChalkboardTeacher size={'5em'} />,
-    link: '/teacher-listings',
+    title: "View Mentors",
+    description: "View all the mentors waiting for your requests.",
+    icon: <FaChalkboardTeacher size={"5em"} />,
+    link: "/teacher-listings",
   },
   {
-    title: 'Outgoing Requests',
-    description: 'View all the incoming requests send by you to mentors.',
-    icon: <FaFacebookMessenger size={'5em'} />,
-    link: '/student-requests',
+    title: "Outgoing Requests",
+    description: "View all the incoming requests send by you to mentors.",
+    icon: <FaFacebookMessenger size={"5em"} />,
+    link: "/student-requests",
   },
   {
-    title: 'Explore labs',
-    description: 'Explore our interactive video and audio chat labs.',
-    icon: <ImLab size={'5em'} />,
-    link: '/labs',
+    title: "Explore labs",
+    description: "Explore our interactive video and audio chat labs.",
+    icon: <ImLab size={"5em"} />,
+    link: "/labs",
+  },
+  {
+    title: "Blogs",
+    description: "Read blogs of others members",
+    icon: <AiFillRead size={"5em"} />,
+    link: "/blogs",
+  },
+  {
+    title: "Forum",
+    description: "Enjoy forum of the system",
+    icon: <AiOutlineFormatPainter size={"5em"} />,
+    link: "/forums",
   },
 ];
 
@@ -44,8 +57,10 @@ export const StudentDashboard = () => {
             <Title level={4}>Student Dashboard</Title>
           </Divider>
           <Paragraph type="secondary">
-            View the different sections by clicking on the cards below. Make sure that you fill up your{' '}
-            <Link to={`/users/${user.id}`}>profile details</Link> before using given features.
+            View the different sections by clicking on the cards below. Make
+            sure that you fill up your{" "}
+            <Link to={`/users/${user.id}`}>profile details</Link> before using
+            given features.
           </Paragraph>
 
           <div className="student-dashboard__features">
