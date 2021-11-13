@@ -4,7 +4,7 @@ export const Footer = () => {
     <div className="footer">
       <div className="container">
         <div className="flex">
-          <div className="footer__copyright"> © {new Date().getFullYear()} All rights reserved. MentorLabs</div>
+          <div className="footer__copyright"> © {new Date().getFullYear()} All rights reserved. MentorsLab</div>
           <div className="footer__links">
             <a href={RICK_ROLL} target="_blank" rel="noreferrer">
               Privacy
