@@ -81,7 +81,7 @@ export const ProfileDetails: React.FC<UserProfileProps> = ({ user, viewerIsUser 
     </Card>
   ) : null;
 
-  const profileCreateElement = showForm && !user.profile ? <ProfileCreate /> : null;
+  const profileCreateElement = showForm && !user.profile ? <ProfileCreate user={user} /> : null;
 
   return (
     <div className="profile-details">

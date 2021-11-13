@@ -16,8 +16,8 @@ export const fetchProfile = createAsyncThunk('profile/fetchProfile', async (user
 export const createProfile = createAsyncThunk('profile/createProfile', async (values: CreateProfileData, thunkAPI) => {
   try {
     const url = config.endpoints.profile.createProfile;
-    const { data } = await http.post<ProfileResponse>(url, values);
-    return data;
+    const { statusText } = await http.post<ProfileResponse>(url, values);
+    return statusText;
   } catch (err) {
     return thunkAPI.rejectWithValue(err.response.data.message);
   }
